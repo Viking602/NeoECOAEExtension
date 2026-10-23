@@ -199,6 +199,12 @@ sourceSets.main.resources {
     srcDirs 'src/generated/resources', 'src/guidebook/resources'
 }
 
+// The official 26.1 branch excludes its KubeJS integration Java classes.
+// Do not advertise that unavailable plugin to an installed KubeJS instance.
+tasks.named('processResources', ProcessResources).configure {
+    exclude 'kubejs.plugins.txt'
+}
+
 sourceSets.main.java {
     exclude 'cn/dancingsnow/neoecoae/integration/appbot/**'
     exclude 'cn/dancingsnow/neoecoae/integration/appflux/**'
